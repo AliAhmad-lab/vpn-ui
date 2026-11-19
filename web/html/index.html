@@ -416,18 +416,22 @@
     {{ if .perms.manageOverview }}
     <article class="bo-tile bo-t-manage" aria-label='{{ i18n "menu.link" }}'>
       <div class="bo-tile-head"><h3 class="bo-tile-title">{{ i18n "menu.link" }}</h3></div>
-      <div class="bo-btn-row bo-btn-row--compact">
-        <button type="button" class="bo-icon-btn" @click="openAllLogs()">
-          <svg class="bo-icon bo-icon-14" aria-hidden="true"><use href="#bo-i-file"></use></svg>{{ i18n "pages.index.logs" }}
+      <div class="bo-manage-grid">
+        <button type="button" class="bo-manage-act" @click="openAllLogs()">
+          <span class="bo-manage-ico"><svg class="bo-icon bo-icon-16" aria-hidden="true"><use href="#bo-i-file"></use></svg></span>
+          <span class="bo-manage-lab">{{ i18n "pages.index.logs" }}</span>
         </button>
-        <button type="button" class="bo-icon-btn" @click="openConfig">
-          <svg class="bo-icon bo-icon-14" aria-hidden="true"><use href="#bo-i-sliders"></use></svg>{{ i18n "pages.index.config" }}
+        <button type="button" class="bo-manage-act" @click="openConfig">
+          <span class="bo-manage-ico"><svg class="bo-icon bo-icon-16" aria-hidden="true"><use href="#bo-i-sliders"></use></svg></span>
+          <span class="bo-manage-lab">{{ i18n "pages.index.config" }}</span>
         </button>
-        <button type="button" class="bo-icon-btn" @click="openBackup">
-          <svg class="bo-icon bo-icon-14" aria-hidden="true"><use href="#bo-i-download"></use></svg>{{ i18n "pages.index.backup" }}
+        <button type="button" class="bo-manage-act" @click="openBackup">
+          <span class="bo-manage-ico"><svg class="bo-icon bo-icon-16" aria-hidden="true"><use href="#bo-i-download"></use></svg></span>
+          <span class="bo-manage-lab">{{ i18n "pages.index.backup" }}</span>
         </button>
-        <button type="button" class="bo-icon-btn" @click="openRestore">
-          <svg class="bo-icon bo-icon-14" aria-hidden="true"><use href="#bo-i-refresh"></use></svg>{{ i18n "pages.index.restore" }}
+        <button type="button" class="bo-manage-act" @click="openRestore">
+          <span class="bo-manage-ico"><svg class="bo-icon bo-icon-16" aria-hidden="true"><use href="#bo-i-refresh"></use></svg></span>
+          <span class="bo-manage-lab">{{ i18n "pages.index.restore" }}</span>
         </button>
       </div>
     </article>

@@ -663,7 +663,76 @@ html[data-theme-animations='off'] body { --au-ease:linear; }
 .ant-message-notice-content,.ant-notification-notice { border-radius:16px; border:1px solid var(--au-hair); background:var(--au-glass-strong); box-shadow:var(--au-shadow); }
 
 /* ================================================================== *
- * 13. login
+ * 13. manage tile — action cards
+ *
+ * The stock markup is a row of small pill buttons pinned to the bottom of a
+ * tall grid cell, which leaves a dead gap above them. Four action cards in a
+ * 2x2 grid fill the cell instead, and each one gets a target big enough to
+ * hit on a phone.
+ * ================================================================== */
+
+.bo-t-manage .bo-tile-head { margin-bottom:14px; }
+
+.bo-manage-grid {
+  display:grid; gap:10px;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  flex:1 1 auto; align-content:stretch;
+}
+@media (max-width:520px) { .bo-manage-grid { grid-template-columns:minmax(0,1fr); } }
+
+.bo-manage-act {
+  position:relative; isolation:isolate; overflow:hidden;
+  display:flex; flex-direction:column; align-items:flex-start; gap:10px;
+  min-height:86px; padding:14px;
+  font-family:inherit; text-align:start; cursor:pointer;
+  color:var(--text-2);
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--au-r-ctl);
+  box-shadow:var(--shadow-sm);
+  transition:transform var(--dur-med) var(--au-ease), border-color var(--dur-med) var(--au-ease),
+             box-shadow var(--dur-med) var(--au-ease), color var(--dur-med) var(--au-ease),
+             background var(--dur-med) var(--au-ease);
+}
+/* accent wash that fades in on hover — a gradient, not a fill, so the card
+   still reads as a surface at rest. */
+.bo-manage-act::before {
+  content:""; position:absolute; inset:0; z-index:-1; opacity:0;
+  background:var(--au-grad-soft);
+  transition:opacity var(--dur-med) var(--au-ease);
+}
+.bo-manage-act:hover {
+  color:var(--text); transform:translateY(-2px);
+  border-color:color-mix(in srgb,var(--accent) 55%,transparent);
+  box-shadow:var(--shadow-md),0 18px 34px -20px var(--au-glow);
+}
+.bo-manage-act:hover::before { opacity:1; }
+.bo-manage-act:active { transform:translateY(0) scale(.99); }
+.bo-manage-act:focus-visible {
+  outline:none; border-color:var(--accent);
+  box-shadow:0 0 0 3px var(--accent-weak),var(--shadow-md);
+}
+
+.bo-manage-ico {
+  display:inline-flex; align-items:center; justify-content:center;
+  width:34px; height:34px; border-radius:11px;
+  color:var(--accent);
+  background:var(--accent-weak);
+  border:1px solid color-mix(in srgb,var(--accent) 28%,transparent);
+  transition:background var(--dur-med) var(--au-ease), color var(--dur-med) var(--au-ease),
+             border-color var(--dur-med) var(--au-ease), box-shadow var(--dur-med) var(--au-ease);
+}
+.bo-manage-act:hover .bo-manage-ico {
+  color:var(--on-accent); background:var(--au-grad); border-color:transparent;
+  box-shadow:0 10px 22px -12px var(--au-glow);
+}
+
+.bo-manage-lab {
+  font-size:var(--fs-sm); font-weight:700; letter-spacing:.01em;
+  color:inherit; line-height:1.2;
+}
+
+/* ================================================================== *
+ * 14. login
  * ================================================================== */
 
 #app.login-app .lgt-card {
