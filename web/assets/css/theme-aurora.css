@@ -671,19 +671,17 @@ html[data-theme-animations='off'] body { --au-ease:linear; }
  * hit on a phone.
  * ================================================================== */
 
-.bo-t-manage .bo-tile-head { margin-bottom:14px; }
+.bo-t-manage .bo-tile-head { margin-bottom:12px; }
 
 .bo-manage-grid {
-  display:grid; gap:10px;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  flex:1 1 auto; align-content:stretch;
+  display:flex; flex-direction:column; gap:8px;
+  flex:1 1 auto;
 }
-@media (max-width:520px) { .bo-manage-grid { grid-template-columns:minmax(0,1fr); } }
 
 .bo-manage-act {
   position:relative; isolation:isolate; overflow:hidden;
-  display:flex; flex-direction:column; align-items:flex-start; justify-content:center; gap:10px;
-  min-height:82px; padding:14px;
+  display:flex; align-items:center; gap:11px;
+  width:100%; flex:1 1 0; min-height:46px; max-height:66px; padding:8px 12px;
   font-family:inherit; text-align:start; cursor:pointer;
   color:var(--text-2);
   background:var(--surface-2); border:1px solid var(--border);
@@ -701,20 +699,20 @@ html[data-theme-animations='off'] body { --au-ease:linear; }
   transition:opacity var(--dur-med) var(--au-ease);
 }
 .bo-manage-act:hover {
-  color:var(--text); transform:translateY(-2px);
+  color:var(--text); transform:translateY(-1px);
   border-color:color-mix(in srgb,var(--accent) 55%,transparent);
   box-shadow:var(--shadow-md),0 18px 34px -20px var(--au-glow);
 }
 .bo-manage-act:hover::before { opacity:1; }
-.bo-manage-act:active { transform:translateY(0) scale(.99); }
+.bo-manage-act:active { transform:translateY(0) scale(.995); }
 .bo-manage-act:focus-visible {
   outline:none; border-color:var(--accent);
   box-shadow:0 0 0 3px var(--accent-weak),var(--shadow-md);
 }
 
 .bo-manage-ico {
-  display:inline-flex; align-items:center; justify-content:center;
-  width:34px; height:34px; border-radius:11px;
+  display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto;
+  width:30px; height:30px; border-radius:9px;
   color:var(--accent);
   background:var(--accent-weak);
   border:1px solid color-mix(in srgb,var(--accent) 28%,transparent);
@@ -725,11 +723,26 @@ html[data-theme-animations='off'] body { --au-ease:linear; }
   color:var(--on-accent); background:var(--au-grad); border-color:transparent;
   box-shadow:0 10px 22px -12px var(--au-glow);
 }
+/* One optical size for all four glyphs: the source icons differ in drawn width,
+   which made the badges look uneven. */
+.bo-manage-ico .bo-icon { width:16px; height:16px; stroke-width:1.8; }
 
 .bo-manage-lab {
-  font-size:var(--fs-sm); font-weight:700; letter-spacing:.01em;
-  color:inherit; line-height:1.2;
+  font-size:var(--fs-base); font-weight:600; letter-spacing:.01em;
+  color:inherit; line-height:1.2; min-width:0;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
 }
+/* A chevron on the trailing edge so each row reads as a way in, not a button
+   in a toolbar. Drawn as a pseudo-element to keep the markup untouched. */
+.bo-manage-act::after {
+  content:""; flex:0 0 auto; width:6px; height:6px; margin-inline-start:auto;
+  border-top:1.6px solid currentColor; border-inline-end:1.6px solid currentColor;
+  transform:rotate(45deg);
+  opacity:.7; transition:opacity var(--dur-med) var(--au-ease), transform var(--dur-med) var(--au-ease);
+}
+.bo-manage-act:hover::after { opacity:1; transform:rotate(45deg) translate(1px,-1px); }
+[dir='rtl'] .bo-manage-act::after { transform:rotate(-135deg); }
+[dir='rtl'] .bo-manage-act:hover::after { transform:rotate(-135deg) translate(1px,-1px); }
 
 /* ================================================================== *
  * 14. login
